@@ -25,9 +25,16 @@ class GroupsController < ApplicationController
   def update
     @group = Group.find(params[:id])
     @group.update(group_params)
-    redirect_to groups_path, notice: "成功保存！"
+    redirect_to groups_path, notice: "保存成功！"
   end
-  
+
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    flash[:alert] = "删除成功！"
+    redirect_to groups_path
+  end
+
   def group_params
     params.require(:group).permit(:title, :description)
   end
